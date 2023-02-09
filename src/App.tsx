@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline } from "@mui/material";
+import Box from "@mui/material/Box";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import { NavBar } from "./components";
+import { persistor, store } from "./redux/store";
+import AppRoutes from "./routes/AppRoutes";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ backgroundColor: "black" }}>
+      <CssBaseline />
+      <BrowserRouter>
+        <NavBar />
+        <PersistGate persistor={persistor}>
+          <Provider store={store}>
+            <AppRoutes />
+          </Provider>
+        </PersistGate>
+      </BrowserRouter>
+    </Box>
   );
-}
+};
 
 export default App;
